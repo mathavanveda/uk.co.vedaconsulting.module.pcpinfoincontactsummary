@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/contact/pcpinfo</path>
+    <page_callback>CRM_Pcpinfoincontactsummary_Page_PCPDetials</page_callback>
+    <title>PCPDetials</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>
