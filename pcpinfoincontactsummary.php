@@ -152,7 +152,7 @@ function pcpinfoincontactsummary_civicrm_preProcess($formName, &$form) {
  */
 function pcpinfoincontactsummary_check_dependencies() {
   _pcpinfoincontactsummary_civix_civicrm_config();
-  if (!in_array('eu.tttp.civisualize' , pcpinfoincontactsummary_get_active_extensions())) {
+  if (!in_array('uk.co.vedaconsulting.pcp_civisualize' , pcpinfoincontactsummary_get_active_extensions())) {
     $status = ts('Civisualize extension is either not installed/enabled. <br />Please install/enable Civisualize extension in order to install this extension.');
     CRM_Core_Session::setStatus( $status );
     $redirect_url = CRM_Utils_System::url( 'civicrm/admin/extensions', 'reset=1' );
@@ -182,13 +182,16 @@ function pcpinfoincontactsummary_get_active_extensions() {
 
 
 function pcpinfoincontactsummary_civicrm_tabs( &$tabs, $contactID ) {
-
-  $url = CRM_Utils_System::url( 'civicrm/contact/pcpinfo', 'snippet=2&cid='.$contactID);
-  $tabs[] = array( 'id'    => 'pcp',
-                   'url'   => $url,
-                   'title' => 'PCP',
-                   'weight'=> 300
-                  );
+  require_once 'CRM/Pcpinfoincontactsummary/Page/PCPDetails.php';
+  $checkPcpExists = CRM_Pcpinfoincontactsummary_Page_PCPDetails::getSQLData($contactID);
+  if (!CRM_Utils_Array::crmIsEmptyArray($checkPcpExists)) {
+    $url = CRM_Utils_System::url( 'civicrm/contact/pcpinfo', 'snippet=2&cid='.$contactID);
+    $tabs[] = array( 'id'    => 'pcp',
+                     'url'   => $url,
+                     'title' => 'PCP',
+                     'weight'=> 300
+                    );
+  }
 }
 
 
@@ -197,9 +200,9 @@ function pcpinfoincontactsummary_civicrm_pageRun( &$page ) {
   //FIXME:need to include only for the contact pcp tab. getting slow now when using in hook
   if ($name == 'CRM_Contact_Page_View_Summary') {
    CRM_Core_Resources::singleton()
-    ->addScriptFile('eu.tttp.civisualize', 'js/d3.v3.js', 110, 'html-header', FALSE)
-    ->addScriptFile('eu.tttp.civisualize', 'js/dc/dc.js', 110, 'html-header', FALSE)
-    ->addScriptFile('eu.tttp.civisualize', 'js/dc/crossfilter.js', 110, 'html-header', FALSE)
-    ->addStyleFile('eu.tttp.civisualize', 'js/dc/dc.css');
+    ->addScriptFile('uk.co.vedaconsulting.pcp_civisualize', 'js/d3.v3.js', 110, 'html-header', FALSE)
+    ->addScriptFile('uk.co.vedaconsulting.pcp_civisualize', 'js/dc/dc.js', 110, 'html-header', FALSE)
+    ->addScriptFile('uk.co.vedaconsulting.pcp_civisualize', 'js/dc/crossfilter.js', 110, 'html-header', FALSE)
+    ->addStyleFile('uk.co.vedaconsulting.pcp_civisualize', 'js/dc/dc.css');
   }
 }

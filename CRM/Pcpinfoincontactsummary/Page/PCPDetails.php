@@ -2,10 +2,10 @@
 
 require_once 'CRM/Core/Page.php';
 
-class CRM_Pcpinfoincontactsummary_Page_PCPDetials extends CRM_Core_Page {
+class CRM_Pcpinfoincontactsummary_Page_PCPDetails extends CRM_Core_Page {
   
   //get pcp details for contact id
-  function getSQLData($contactId) {
+  static function getSQLData($contactId) {
     $where = NULL;
     if ($contactId) {
       $where = " AND (contribute.contact_id = {$contactId} OR soft_contribute.contact_id = {$contactId})";
@@ -44,11 +44,11 @@ class CRM_Pcpinfoincontactsummary_Page_PCPDetials extends CRM_Core_Page {
   }
   
   function run() {
-    // CRM_Core_Resources::singleton()
-    //   ->addScriptFile('eu.tttp.civisualize', 'js/d3.v3.js', 110, 'html-header', FALSE)
-    //   ->addScriptFile('eu.tttp.civisualize', 'js/dc/dc.js', 110, 'html-header', FALSE)
-    //   ->addScriptFile('eu.tttp.civisualize', 'js/dc/crossfilter.js', 110, 'html-header', FALSE)
-    //   ->addStyleFile('eu.tttp.civisualize', 'js/dc/dc.css');
+    CRM_Core_Resources::singleton()
+      ->addScriptFile('uk.co.vedaconsulting.pcp_civisualize', 'js/d3.v3.js', 110, 'html-header', FALSE)
+      ->addScriptFile('uk.co.vedaconsulting.pcp_civisualize', 'js/dc/dc.js', 110, 'html-header', FALSE)
+      ->addScriptFile('uk.co.vedaconsulting.pcp_civisualize', 'js/dc/crossfilter.js', 110, 'html-header', FALSE)
+      ->addStyleFile('uk.co.vedaconsulting.pcp_civisualize', 'js/dc/dc.css');
       
     $contactID  = (int) CRM_Utils_Request::retrieve( 'cid', 'Positive', $this, true, NULL, 'GET');
     $values     = self::getSQLData($contactID);

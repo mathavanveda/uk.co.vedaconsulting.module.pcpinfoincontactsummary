@@ -2,7 +2,7 @@
 <menu>
   <item>
     <path>civicrm/contact/pcpinfo</path>
-    <page_callback>CRM_Pcpinfoincontactsummary_Page_PCPDetials</page_callback>
+    <page_callback>CRM_Pcpinfoincontactsummary_Page_PCPDetails</page_callback>
     <title>PCPDetials</title>
     <access_arguments>access CiviCRM</access_arguments>
   </item>
