@@ -185,11 +185,11 @@ function pcpinfoincontactsummary_civicrm_tabs( &$tabs, $contactID ) {
   require_once 'CRM/Pcpinfoincontactsummary/Page/PCPDetails.php';
   $checkPcpExists = CRM_Pcpinfoincontactsummary_Page_PCPDetails::getSQLData($contactID);
   if (!CRM_Utils_Array::crmIsEmptyArray($checkPcpExists)) {
-    $url = CRM_Utils_System::url( 'civicrm/contact/pcpinfo', 'snippet=2&cid='.$contactID);
-    $tabs[] = array( 'id'    => 'pcp',
+    $url = CRM_Utils_System::url( 'civicrm/contact/pcpinfovisual', 'snippet=2&cid='.$contactID);
+    $tabs[] = array( 'id'    => 'pcpvisual',
                      'url'   => $url,
-                     'title' => 'PCP',
-                     'weight'=> 300
+                     'title' => 'PCP Visual',
+                     'weight'=> 400
                     );
   }
 }
